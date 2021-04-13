@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->post('/forgotpassword', 'UserController@ForgotPassword');
+$router->post('/login', 'UserController@Login');
+$router->post('/register', 'UserController@Register');
+$router->post('/auth', ['middleware' => 'auth', 'uses' => 'UserController@Auth']);
