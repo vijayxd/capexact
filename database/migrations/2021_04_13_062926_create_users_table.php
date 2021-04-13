@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('zip');
+            $table->string('role')->default('user');
         });
     }
 

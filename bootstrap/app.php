@@ -88,6 +88,13 @@ $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
+$app->routeMiddleware([
+    'admin' => App\Http\Middleware\AuthenticateAdmin::class,
+]);
+$app->routeMiddleware([
+    'superadmin' => App\Http\Middleware\AuthenticateSuperAdmin::class,
+]);
+
 
 /*
 |--------------------------------------------------------------------------

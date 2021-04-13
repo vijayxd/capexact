@@ -50,7 +50,7 @@ class UserController extends Controller
 
     public function Auth(Request $request)
     {
-        return Auth::user();
+        return Auth::user()->properties;
     }
 
     public function ForgotPassword(Request $request)
@@ -64,6 +64,14 @@ class UserController extends Controller
         // );;
 
         return '$mail';
+    }
+
+    public function ChangeRole(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->role = $request->role;
+        $user->save();
+        return $user;
     }
     //
 }

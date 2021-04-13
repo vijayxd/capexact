@@ -29,6 +29,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'city',
         'state',
         'zip',
+        'role'
     ];
 
     /**
@@ -39,4 +40,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function properties()
+    {
+
+        return  $this->hasMany(Property::class);
+    }
 }
