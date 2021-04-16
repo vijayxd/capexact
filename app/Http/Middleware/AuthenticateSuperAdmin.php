@@ -23,7 +23,7 @@ class AuthenticateSuperAdmin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::user() && Auth::user()->role == 'superadmin') {
+        if (Auth::user() && Auth::user()->id == 1) {
             return $next($request);
         }
         return response('Unauthorized.', 401);

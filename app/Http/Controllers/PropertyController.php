@@ -21,7 +21,27 @@ class PropertyController extends Controller
         return $property;
     }
 
-    
+    public function Update(Request $request)
+    {
+        $property = Property::find($request->id);
+
+        $property->Update($request->all());
+
+
+
+        return $property;
+    }
+
+    public function Delete(Request $request)
+    {
+        $property = Property::find($request->id);
+        
+        $property->delete();
+
+        return 'deleted';
+    }
+
+
 
 
     //

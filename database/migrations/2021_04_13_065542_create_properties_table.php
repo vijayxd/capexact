@@ -18,6 +18,10 @@ class CreatePropertiesTable extends Migration
             $table->timestamps();
             $table->bigInteger('user_id');
             $table->string('name');
+            $table->string('address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('zip');
             $table->string('capexbudget');
             $table->integer('numberofunits');
             $table->integer('numofbuildings');

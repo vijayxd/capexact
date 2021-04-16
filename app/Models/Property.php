@@ -28,7 +28,11 @@ class Property extends Model
         'floorplans',
         'globalTiles',
         'miscelaneous',
-        'user_id'
+        'user_id',
+        'address',
+        'city',
+        'state',
+        'zip'
     ];
 
     protected $casts = [
@@ -40,6 +44,7 @@ class Property extends Model
         'floorplans' => 'array',
         'globalTiles' => 'array',
         'miscelaneous' => 'array',
+        
     ];
 
     public function user()

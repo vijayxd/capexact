@@ -22,10 +22,9 @@ class UserController extends Controller
 
         try {
             $user = User::create($userDetails);
-
             return $user;
         } catch (Exception $e) {
-            return $e;
+            return response(['message' => $e->getMessage()], 400);
         }
     }
 
@@ -33,14 +32,13 @@ class UserController extends Controller
     public function Login(Request $request)
     {
 
-
         $user = User::Where('email', $request->email)->first();
 
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $user->api_token = sha1($user->id_user . time());
                 $user->save();
-                return ['api_token' => $user->api_token];
+                return $user;
             }
             return response(['message' => 'invalid password'], 400);
         }
@@ -50,20 +48,37 @@ class UserController extends Controller
 
     public function Auth(Request $request)
     {
-        return Auth::user()->properties;
+        return ['user' => Auth::user(), 'properties' => Auth::user()->properties];
+    }
+
+    public function ResetPassword(Request $request)
+    {
+        $user = User::Where('email', Auth::user()->email)->first();
+
+        $user->password = Hash::make($request->newpassword);
+
+        $user->save();
+
+        return $user;
     }
 
     public function ForgotPassword(Request $request)
     {
 
-        // $mail =  Mail::send(
-        //     new ResetPassword(
-        //         'vijayxd@gmail.com',
-        //         'verificationCode'
-        //     )
-        // );;
 
-        return '$mail';
+        $user = User::Where('email', $request->email)->first();
+
+        if ($user) {
+            Mail::send(
+                new ResetPassword(
+                    $user->email,
+                    $user->api_token
+                )
+            );
+            return response(['message' => 'please check your email and enter verification code']);
+        } else {
+            return response(['message' => 'no user available with this email id'], 400);
+        }
     }
 
     public function ChangeRole(Request $request)
@@ -72,6 +87,10 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->save();
         return $user;
+    }
+
+    public function GetAllUsers(){
+        return User::all();
     }
     //
 }

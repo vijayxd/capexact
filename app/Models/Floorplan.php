@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Amenity extends Model
+class Floorplan extends Model
 {
 
     /**
@@ -13,11 +13,15 @@ class Amenity extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'info',
-        'cost',
-        'photos',
-        'url'
+        'bathCabinets',
+        'interiorDoors',
+        'kitchenCabinets',
+        'lights',
+        'plan',
+        'sinks',
+        'sqft',
+        'toilets',
+        'tubs',
     ];
 
     protected $casts = [

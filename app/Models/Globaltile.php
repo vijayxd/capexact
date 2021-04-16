@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Amenity extends Model
+class Globaltile extends Model
 {
 
     /**
@@ -14,10 +14,11 @@ class Amenity extends Model
      */
     protected $fillable = [
         'name',
-        'info',
+        'calc',
         'cost',
         'photos',
-        'url'
+        'url',
+        'type'
     ];
 
     protected $casts = [
